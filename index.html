@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dispatch | Member offers for your area</title>
+<meta name="description" content="Enter your email and postal code to see the member offer available where you live. Open to members in the United States, Canada, the United Kingdom, Australia and Germany.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ---------- Theme tokens ---------- */
+:root {
+  --bg: #E9EDF0;
+  --paper: #FBFAF6;
+  --ink: #14213A;
+  --muted: #4B5870;
+  --line: #CBD3DD;
+  --line-strong: #94A1B5;
+  --input: #FFFFFF;
+  --stamp: #2C5C8F;
+  --ring: rgba(44, 92, 143, 0.35);
+  --btn-bg: #14213A;
+  --btn-text: #FBFAF6;
+  --btn-hover: #2C5C8F;
+  --btn-hover-text: #FFFFFF;
+  --ok: #2E6B4F;
+  --error: #A3362B;
+  --shadow: 0 1px 0 rgba(20, 33, 58, 0.04), 0 32px 60px -36px rgba(20, 33, 58, 0.5);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C1321;
+    --paper: #13203A;
+    --ink: #EDF1F7;
+    --muted: #A4AFC3;
+    --line: #26344E;
+    --line-strong: #4A5A78;
+    --input: #0F1A2E;
+    --stamp: #8DB5E4;
+    --ring: rgba(141, 181, 228, 0.4);
+    --btn-bg: #EDF1F7;
+    --btn-text: #0C1321;
+    --btn-hover: #8DB5E4;
+    --btn-hover-text: #0C1321;
+    --ok: #7CC7A2;
+    --error: #F0A093;
+    --shadow: 0 32px 60px -36px rgba(0, 0, 0, 0.8);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0C1321;
+  --paper: #13203A;
+  --ink: #EDF1F7;
+  --muted: #A4AFC3;
+  --line: #26344E;
+  --line-strong: #4A5A78;
+  --input: #0F1A2E;
+  --stamp: #8DB5E4;
+  --ring: rgba(141, 181, 228, 0.4);
+  --btn-bg: #EDF1F7;
+  --btn-text: #0C1321;
+  --btn-hover: #8DB5E4;
+  --btn-hover-text: #0C1321;
+  --ok: #7CC7A2;
+  --error: #F0A093;
+  --shadow: 0 32px 60px -36px rgba(0, 0, 0, 0.8);
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  background: var(--bg);
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+[hidden] { display: none !important; }
+
+:focus-visible {
+  outline: 2px solid var(--stamp);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: min(1120px, 100% - 48px);
+  margin-inline: auto;
+}
+
+.serif {
+  font-family: "Bodoni Moda", Georgia, "Times New Roman", serif;
+}
+
+/* ---------- Header ---------- */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+}
+
+.brand-mark {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid var(--stamp);
+  border-radius: 50%;
+}
+
+.brand-mark::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--stamp);
+}
+
+.top nav a {
+  margin-left: 28px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.top nav a:hover { color: var(--ink); }
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 72px;
+  align-items: center;
+  padding: 56px 0 96px;
+}
+
+.hero h1 {
+  margin: 0 0 24px;
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5.6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.lead {
+  max-width: 34ch;
+  margin: 0 0 28px;
+  color: var(--muted);
+  font-size: 1.18rem;
+}
+
+.regions {
+  max-width: 44ch;
+  margin: 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 0.95rem;
+}
+
+/* ---------- Form card ---------- */
+.card {
+  position: relative;
+  padding: 36px 32px 32px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.postmark {
+  position: absolute;
+  top: -34px;
+  right: -26px;
+  width: 128px;
+  height: 128px;
+  color: var(--stamp);
+  opacity: 0.92;
+  transform: rotate(-12deg);
+  pointer-events: none;
+  animation: strike 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) 0.35s both;
+}
+
+@keyframes strike {
+  from { opacity: 0; transform: rotate(-12deg) scale(1.35); }
+  to   { opacity: 0.92; transform: rotate(-12deg) scale(1); }
+}
+
+.form-head h2 {
+  margin: 0 0 6px;
+  padding-right: 96px;
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-weight: 600;
+  font-size: 1.7rem;
+  line-height: 1.15;
+}
+
+.form-head h2:focus { outline: none; }
+
+.form-head p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.field { margin-bottom: 18px; }
+
+.lbl {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 1rem; /* 16px avoids iOS zoom */
+  color: var(--ink);
+  background: var(--input);
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+}
+
+.input::placeholder { color: var(--muted); opacity: 0.7; }
+
+.field.invalid .input { border-color: var(--error); }
+
+.error {
+  display: none;
+  margin: 6px 0 0;
+  color: var(--error);
+  font-size: 0.88rem;
+}
+
+.field.invalid .error { display: block; }
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.consent input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  accent-color: var(--stamp);
+}
+
+.consent a { color: var(--ink); }
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  margin: 0;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+  color: var(--btn-hover-text);
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.form-error {
+  margin: 0 0 16px;
+  color: var(--error);
+  font-size: 0.92rem;
+}
+
+.fine {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  text-align: center;
+}
+
+.link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--stamp);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding: 96px 0;
+  border-top: 1px solid var(--line);
+}
+
+.section h2 {
+  max-width: 20ch;
+  margin: 0 0 16px;
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 3.6vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.intro {
+  max-width: 52ch;
+  margin: 0 0 48px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  padding-top: 22px;
+  border-top: 2px solid var(--ink);
+}
+
+.step-no {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--stamp);
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.steps h3 {
+  margin: 0 0 8px;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.steps p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.points li {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+
+.points li:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.points h3 {
+  margin: 0 0 6px;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.points p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ---------- FAQ ---------- */
+.faq details { border-top: 1px solid var(--line); }
+.faq details:last-child { border-bottom: 1px solid var(--line); }
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker { display: none; }
+
+.faq summary::after {
+  content: "+";
+  flex: none;
+  color: var(--stamp);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.faq details[open] summary::after { transform: rotate(45deg); }
+
+.faq details p {
+  max-width: 64ch;
+  margin: 0 0 24px;
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+.foot {
+  padding: 40px 0 56px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: 20px;
+}
+
+.foot-links a { color: var(--ink); }
+
+.foot p {
+  max-width: 80ch;
+  margin: 0 0 16px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 24px 0 72px;
+  }
+  .card { max-width: 480px; width: 100%; }
+  .steps { grid-template-columns: 1fr; gap: 32px; }
+  .split { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 560px) {
+  .top nav { display: none; }
+  .card { padding: 28px 22px 24px; }
+  .postmark { width: 96px; height: 96px; top: -26px; right: -8px; }
+  .form-head h2 { padding-right: 70px; font-size: 1.5rem; }
+  .section { padding: 72px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .postmark { animation: none; }
+  .btn, .faq summary::after { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="brand" href="#top" aria-label="Dispatch home">
+    <span class="brand-mark" aria-hidden="true"></span>Dispatch
+  </a>
+  <nav aria-label="Page sections">
+    <a href="#how">How it works</a>
+    <a href="#faq">Questions</a>
+  </nav>
+</header>
+
+<main class="wrap" id="top">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <h1 id="hero-title">Your reward is one postal code away.</h1>
+      <p class="lead">Enter your email and postal code to see the member offer available where you live. Details are sent to your inbox.</p>
+      <p class="regions">Open to members in the United States, Canada, the United Kingdom, Australia and Germany.</p>
+    </div>
+
+    <div class="card">
+      <svg class="postmark" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+        <defs>
+          <path id="pm-ring" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"/>
+        </defs>
+        <g fill="none" stroke="currentColor">
+          <circle cx="100" cy="100" r="97" stroke-width="2.5"/>
+          <circle cx="100" cy="100" r="62" stroke-width="1.5"/>
+        </g>
+        <text fill="currentColor" font-family="Hanken Grotesk, system-ui, sans-serif" font-size="14" font-weight="700" letter-spacing="0.6">
+          <textPath href="#pm-ring" textLength="432" lengthAdjust="spacing">Dispatch member rewards • 2026 •</textPath>
+        </text>
+        <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+          <rect x="72" y="80" width="56" height="38" rx="2"/>
+          <path d="M72,80 L100,103 L128,80"/>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.75">
+          <path d="M56,134 q5.5,-6 11,0 t11,0 t11,0 t11,0 t11,0 t11,0 t11,0 t11,0"/>
+          <path d="M64,144 q5.5,-6 11,0 t11,0 t11,0 t11,0 t11,0 t11,0 t11,0"/>
+        </g>
+      </svg>
+
+      <!-- Step 1: the form -->
+      <div id="form-view">
+        <div class="form-head">
+          <h2>See your member offer</h2>
+          <p>Two fields and a quick confirmation.</p>
+        </div>
+
+        <form id="lead-form" novalidate>
+          <div class="field" id="field-email">
+            <label class="lbl" for="email">Email address</label>
+            <input class="input" id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-describedby="email-error" aria-invalid="false">
+            <p class="error" id="email-error">Enter an email address like name@example.com.</p>
+          </div>
+
+          <div class="field">
+            <label class="lbl" for="country">Country</label>
+            <select class="input" id="country" name="country" autocomplete="country">
+              <option value="US">United States</option>
+              <option value="CA">Canada</option>
+              <option value="GB">United Kingdom</option>
+              <option value="AU">Australia</option>
+              <option value="DE">Germany</option>
+            </select>
+          </div>
+
+          <div class="field" id="field-postal">
+            <label class="lbl" for="postal" id="postal-label">ZIP code</label>
+            <input class="input" id="postal" name="postal" type="text" autocomplete="postal-code" placeholder="10001" aria-describedby="postal-error" aria-invalid="false">
+            <p class="error" id="postal-error">Enter a 5-digit ZIP code, such as 10001.</p>
+          </div>
+
+          <div class="field" id="field-consent">
+            <label class="consent">
+              <input type="checkbox" id="consent" name="consent" aria-describedby="consent-error">
+              <span>I am 18 or older and agree to receive offer emails. I can unsubscribe at any time. See the <a href="#privacy">Privacy Policy</a>.</span>
+            </label>
+            <p class="error" id="consent-error">Confirm that you are 18 or older and agree to receive emails.</p>
+          </div>
+
+          <p class="form-error" id="form-error" role="alert" hidden>We could not save your details. Check your connection and try again.</p>
+
+          <button class="btn" id="submit-btn" type="submit">See my member offer</button>
+          <p class="fine">Offers vary by region and eligibility. Not every member qualifies.</p>
+        </form>
+      </div>
+
+      <!-- Step 2: result -->
+      <div id="success-view" hidden>
+        <div class="form-head">
+          <h2 id="success-title" tabindex="-1">Your member offer is ready.</h2>
+          <p id="success-text"></p>
+        </div>
+        <a class="btn" id="offer-link" href="#" target="_blank" rel="noopener sponsored">View the offer and terms</a>
+        <p class="fine"><button type="button" class="link-btn" id="reset-btn">Use different details</button></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how" aria-labelledby="how-title">
+    <h2 id="how-title">How it works</h2>
+    <p class="intro">Three steps, and you decide at each one.</p>
+    <ol class="steps">
+      <li>
+        <span class="step-no" aria-hidden="true">1</span>
+        <h3>Tell us where you are</h3>
+        <p>Add your email, country and postal code. It takes under a minute.</p>
+      </li>
+      <li>
+        <span class="step-no" aria-hidden="true">2</span>
+        <h3>See the offer for your area</h3>
+        <p>We show the member offer available in your country and postal code.</p>
+      </li>
+      <li>
+        <span class="step-no" aria-hidden="true">3</span>
+        <h3>Read the terms first</h3>
+        <p>Each offer lists what it requires before you start. Continue only if it suits you.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section" aria-labelledby="why-title">
+    <div class="split">
+      <div>
+        <h2 id="why-title">Built to be straightforward.</h2>
+        <p class="intro" style="margin-bottom:0">No hidden steps. Here is what you can expect at every stage.</p>
+      </div>
+      <ul class="points">
+        <li>
+          <h3>Matched to your region</h3>
+          <p>Offers are chosen for the country and postal code you enter, so you only see what applies to you.</p>
+        </li>
+        <li>
+          <h3>Terms before commitment</h3>
+          <p>Requirements are shown before you start any offer. Submitting this form costs nothing.</p>
+        </li>
+        <li>
+          <h3>Easy to leave</h3>
+          <p>Every email includes an unsubscribe link, and you can stop receiving them at any time.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">Questions</h2>
+    <details>
+      <summary>Is there a cost to enter?</summary>
+      <p>Entering your details here is free. Some offers ask you to complete a short action, such as a trial sign-up. The terms for each offer list everything required before you start.</p>
+    </details>
+    <details>
+      <summary>Why do you need my postal code?</summary>
+      <p>It is used to show the offers available where you live. Offers differ by region, so this keeps the list relevant to you.</p>
+    </details>
+    <details>
+      <summary>What happens with my email?</summary>
+      <p>We use it to send offer details and important updates about your request. You can unsubscribe at any time from any email. The Privacy Policy explains everything else.</p>
+    </details>
+    <details>
+      <summary>Who can take part?</summary>
+      <p>You must be 18 or older and live in one of the five countries listed above. Eligibility can vary by offer.</p>
+    </details>
+    <details>
+      <summary>Is Dispatch affiliated with the brands in offers?</summary>
+      <p>No. Dispatch is an independent promotional site. Brand names belong to their owners and do not imply endorsement.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="wrap foot">
+  <div class="foot-links">
+    <a href="#privacy">Privacy Policy</a>
+    <a href="#terms">Terms</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p>Dispatch is an independent promotional site. It is not affiliated with, endorsed by, or sponsored by any brand, retailer or platform mentioned here. Some links are paid partner offers, so we may earn a commission. Offers can change, may be limited to certain regions, and are not guaranteed. By submitting this form, you agree to our Terms and Privacy Policy.</p>
+  <p>&copy; 2026 Dispatch. All rights reserved.</p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ============================================================
+     CONFIGURE BEFORE GOING LIVE
+     - OFFER_URL: your tracking link for the offer.
+     - LEAD_ENDPOINT: where submissions are sent (your network's
+       postback or form endpoint). While this is empty, the form
+       shows the result but sends nothing, so no leads are saved.
+     ============================================================ */
+  var OFFER_URL = "https://YOUR-TRACKING-LINK-HERE";
+  var LEAD_ENDPOINT = "";
+
+  var SUBMIT_LABEL = "See my member offer";
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  var COUNTRIES = {
+    US: { name: "the United States", label: "ZIP code", placeholder: "10001", error: "Enter a 5-digit ZIP code, such as 10001.", pattern: /^\d{5}(-\d{4})?$/ },
+    CA: { name: "Canada", label: "Postal code", placeholder: "K1A 0B1", error: "Enter a postal code like K1A 0B1.", pattern: /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/ },
+    GB: { name: "the United Kingdom", label: "Postcode", placeholder: "SW1A 1AA", error: "Enter a postcode like SW1A 1AA.", pattern: /^[A-Za-z]{1,2}\d[A-Za-z\d]?\s?\d[A-Za-z]{2}$/ },
+    AU: { name: "Australia", label: "Postcode", placeholder: "2000", error: "Enter a 4-digit postcode, such as 2000.", pattern: /^\d{4}$/ },
+    DE: { name: "Germany", label: "Postal code", placeholder: "10115", error: "Enter a 5-digit postal code, such as 10115.", pattern: /^\d{5}$/ }
+  };
+
+  function $(id) { return document.getElementById(id); }
+
+  var els = {
+    formView: $("form-view"),
+    successView: $("success-view"),
+    successTitle: $("success-title"),
+    successText: $("success-text"),
+    offerLink: $("offer-link"),
+    reset: $("reset-btn"),
+    form: $("lead-form"),
+    email: $("email"),
+    country: $("country"),
+    postal: $("postal"),
+    postalLabel: $("postal-label"),
+    postalError: $("postal-error"),
+    consent: $("consent"),
+    fieldEmail: $("field-email"),
+    fieldPostal: $("field-postal"),
+    fieldConsent: $("field-consent"),
+    submit: $("submit-btn"),
+    formError: $("form-error")
+  };
+
+  function mark(field, input, ok) {
+    field.classList.toggle("invalid", !ok);
+    input.setAttribute("aria-invalid", ok ? "false" : "true");
+    return ok;
+  }
+
+  function emailOK() {
+    return EMAIL_RE.test(els.email.value.trim());
+  }
+
+  function postalOK() {
+    return COUNTRIES[els.country.value].pattern.test(els.postal.value.trim());
+  }
+
+  function syncPostalField() {
+    var c = COUNTRIES[els.country.value];
+    els.postalLabel.textContent = c.label;
+    els.postal.placeholder = c.placeholder;
+    els.postalError.textContent = c.error;
+    els.fieldPostal.classList.remove("invalid");
+    els.postal.setAttribute("aria-invalid", "false");
+  }
+
+  // Live re-check only after a field has already failed once.
+  els.email.addEventListener("input", function () {
+    if (els.fieldEmail.classList.contains("invalid")) mark(els.fieldEmail, els.email, emailOK());
+  });
+  els.postal.addEventListener("input", function () {
+    if (els.fieldPostal.classList.contains("invalid")) mark(els.fieldPostal, els.postal, postalOK());
+  });
+  els.consent.addEventListener("change", function () {
+    if (els.fieldConsent.classList.contains("invalid")) mark(els.fieldConsent, els.consent, els.consent.checked);
+  });
+  els.country.addEventListener("change", syncPostalField);
+
+  function showSuccess(payload) {
+    var c = COUNTRIES[payload.country];
+    els.successText.textContent =
+      "Matched to " + c.name + ". " + c.label + " " + payload.postal.toUpperCase() +
+      ". Read the terms before you start, since requirements vary by offer.";
+    els.offerLink.href = OFFER_URL;
+
+    els.formView.hidden = true;
+    els.successView.hidden = false;
+    els.submit.disabled = false;
+    els.submit.textContent = SUBMIT_LABEL;
+    els.successTitle.focus();
+  }
+
+  els.form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    els.formError.hidden = true;
+
+    var okEmail = mark(els.fieldEmail, els.email, emailOK());
+    var okPostal = mark(els.fieldPostal, els.postal, postalOK());
+    var okConsent = mark(els.fieldConsent, els.consent, els.consent.checked);
+
+    if (!okEmail || !okPostal || !okConsent) {
+      var first = !okEmail ? els.email : (!okPostal ? els.postal : els.consent);
+      first.focus();
+      return;
+    }
+
+    var payload = {
+      email: els.email.value.trim(),
+      country: els.country.value,
+      postal: els.postal.value.trim()
+    };
+
+    if (!LEAD_ENDPOINT) {
+      showSuccess(payload);
+      return;
+    }
+
+    els.submit.disabled = true;
+    els.submit.textContent = "Sending…";
+
+    fetch(LEAD_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error("Request failed");
+        showSuccess(payload);
+      })
+      .catch(function () {
+        els.formError.hidden = false;
+        els.submit.disabled = false;
+        els.submit.textContent = SUBMIT_LABEL;
+      });
+  });
+
+  els.reset.addEventListener("click", function () {
+    els.successView.hidden = true;
+    els.formView.hidden = false;
+    els.email.focus();
+  });
+
+  syncPostalField();
+})();
+</script>
+</body>
+</html>
